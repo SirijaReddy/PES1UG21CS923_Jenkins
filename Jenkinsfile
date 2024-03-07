@@ -4,19 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    // Compile the .cpp file using a shell script
-                    sh 'g++ -o myProgram hello.cpp'
-                }
+                build 'PES1UG21CS923-1'
+                sh 'g++ hello.cpp -o output'
             }
         }
         
         stage('Test') {
             steps {
-                script {
-                    // Print the output of the compiled .cpp file
-                    sh './myProgram'
-                }
+                sh './output'
             }
         }
         
@@ -30,7 +25,7 @@ pipeline {
 
     post {
         failure {
-            echo 'Pipeline failed'
+            error 'Pipeline failed'
         }
     }
 }
